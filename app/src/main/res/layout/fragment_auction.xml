@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+    <EditText
+        android:id="@+id/et_book_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter Book Title"/>
+
+    <EditText
+        android:id="@+id/et_book_starting_bid"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter Starting Bid"
+        android:inputType="numberDecimal"/>
+
+    <Button
+        android:id="@+id/btn_start_auction"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Start Auction"
+        style="@style/CustomButton"/>
+</LinearLayout>

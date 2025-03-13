@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    tools:context=".HomeFragment">
+
+    <!-- Search Bar -->
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/search_books"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:queryHint="Search for books..."
+        android:iconifiedByDefault="false"
+        android:background="@drawable/search_background"
+        android:padding="8dp" />
+
+    <!-- Category Section -->
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="10dp"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btn_fiction"
+                style="@style/CategoryButton"
+                android:text="Fiction" />
+
+            <Button
+                android:id="@+id/btn_nonfiction"
+                style="@style/CategoryButton"
+                android:text="Non-fiction" />
+
+            <Button
+                android:id="@+id/btn_scifi"
+                style="@style/CategoryButton"
+                android:text="Sci-Fi" />
+
+            <Button
+                android:id="@+id/btn_education"
+                style="@style/CategoryButton"
+                android:text="Education" />
+        </LinearLayout>
+    </HorizontalScrollView>
+
+    <!-- Featured Books (Horizontal Scroll) -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Featured Books"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_marginTop="12dp" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_featured_books"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:orientation="horizontal"
+        android:overScrollMode="never"
+        android:layout_marginBottom="12dp" />
+
+    <!-- Recent Listings (Vertical Scroll) -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Recent Listings"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_marginTop="12dp" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_recent_books"
+        android:layout_width="match_parent"
+        android:layout_height="271dp"
+        android:overScrollMode="never" />
+
+</LinearLayout>
