@@ -4,124 +4,109 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
+
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.FirebaseFirestore;
-
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class SignupActivity extends AppCompatActivity {
-    private TextInputEditText inputEmail, inputPassword, inputName, inputRollNumber;
-    private Button btnSignup, btnLogin, btnGuest;
-    private ProgressBar progressBar;
-    private FirebaseAuth auth;
-    private FirebaseFirestore db;
+
+    EditText signup_name, signup_roll_number, signup_email, signup_password;
+    TextView btn_login;
+    Button signup_button, btn_guest;
+    FirebaseAuth mAuth;
+    FirebaseDatabase database;
+    DatabaseReference reference;
+    ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
 
-        auth = FirebaseAuth.getInstance();
-        db = FirebaseFirestore.getInstance();
+        // Initialize Firebase Auth
+        mAuth = FirebaseAuth.getInstance();
+        database = FirebaseDatabase.getInstance();
+        reference = database.getReference("users");
 
-        inputEmail = findViewById(R.id.email);
-        inputPassword = findViewById(R.id.password);
-        inputName = findViewById(R.id.name);
-        inputRollNumber = findViewById(R.id.roll_number);
-        btnSignup = findViewById(R.id.btn_signup);
-        btnLogin = findViewById(R.id.btn_login);
-        btnGuest = findViewById(R.id.btn_guest);
+        signup_email = findViewById(R.id.signup_email);
+        signup_password = findViewById(R.id.signup_password);
+        signup_roll_number = findViewById(R.id.signup_roll_number);
+        signup_name = findViewById(R.id.signup_name);
+        btn_login = findViewById(R.id.btn_login);
+        signup_button = findViewById(R.id.signup_button);
+        btn_guest = findViewById(R.id.btn_guest);
         progressBar = findViewById(R.id.progressBar);
+        // Guest login click listener
+        btn_guest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent guestIntent = new Intent(SignupActivity.this, MainActivity.class);
+                guestIntent.putExtra("guest", true); // Pass guest flag
+                startActivity(guestIntent);
+                finish(); // Finish login activity
+            }
+        });
+        signup_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String name = signup_name.getText().toString().trim();
+                String roll_number = signup_roll_number.getText().toString().trim();
+                String email = signup_email.getText().toString().trim();
+                String password = signup_password.getText().toString().trim();
 
-        btnSignup.setOnClickListener(v -> registerUser());
-        btnLogin.setOnClickListener(v -> startActivity(new Intent(SignupActivity.this, LoginActivity.class)));
-        btnGuest.setOnClickListener(v -> continueAsGuest());
-    }
+                if (name.isEmpty() || roll_number.isEmpty() || email.isEmpty() || password.isEmpty()) {
+                    Toast.makeText(SignupActivity.this, "All fields are required!", Toast.LENGTH_SHORT).show();
+                    return;
+                }
 
-    private void continueAsGuest() {
-        Intent intent = new Intent(SignupActivity.this, MainActivity.class);
-        intent.putExtra("isGuest", true);
-        startActivity(intent);
-        finish();
-    }
+                progressBar.setVisibility(View.VISIBLE);
 
-    private void registerUser() {
-        String email = Objects.requireNonNull(inputEmail.getText()).toString().trim();
-        String password = Objects.requireNonNull(inputPassword.getText()).toString().trim();
-        String name = Objects.requireNonNull(inputName.getText()).toString().trim();
-        String rollNumber = Objects.requireNonNull(inputRollNumber.getText()).toString().trim();
+                mAuth.createUserWithEmailAndPassword(email, password)
+                        .addOnCompleteListener(task -> {
+                            if (task.isSuccessful()) {
+                                FirebaseUser user = mAuth.getCurrentUser();
+                                if (user != null) {
+                                    String userID = user.getUid();
+                                    database = FirebaseDatabase.getInstance();
+                                    reference = database.getReference("users");
 
-        if (!isValidInput(email, password, name, rollNumber)) return;
+                                    // Create user object
+                                    HelperClass helperClass = new HelperClass(name, roll_number, email, password);
 
-        progressBar.setVisibility(View.VISIBLE);
-        btnSignup.setEnabled(false);
+                                    // Store user data under their UID
+                                    reference.child(userID).setValue(helperClass)
+                                            .addOnCompleteListener(task1 -> {
+                                                if (task1.isSuccessful()) {
+                                                    Toast.makeText(SignupActivity.this, "User registered successfully", Toast.LENGTH_SHORT).show();
+                                                    startActivity(new Intent(SignupActivity.this, LoginActivity.class));
+                                                    finish();
+                                                } else {
+                                                    Toast.makeText(SignupActivity.this, "Failed to store user data!", Toast.LENGTH_SHORT).show();
+                                                }
+                                            });
+                                }
+                            } else {
+                                if (task.getException() != null) {
+                                    Toast.makeText(SignupActivity.this, "Registration Failed: " + task.getException().getMessage(), Toast.LENGTH_LONG).show();
+                                } else {
+                                    Toast.makeText(SignupActivity.this, "Registration Failed!", Toast.LENGTH_LONG).show();
+                                }
+                            }
+                            progressBar.setVisibility(View.GONE);
+                        });
+            }
+        });
 
-        auth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(task -> {
-                    if (task.isSuccessful()) {
-                        FirebaseUser user = auth.getCurrentUser();
-                        if (user != null) {
-                            saveUserToFirestore(user.getUid(), name, email, rollNumber);
-                        }
-                    } else {
-                        progressBar.setVisibility(View.GONE);
-                        btnSignup.setEnabled(true);
-                        showToast("Signup Failed: " + Objects.requireNonNull(task.getException()).getMessage());
-                    }
-                });
-    }
 
-    private boolean isValidInput(String email, String password, String name, String rollNumber) {
-        if (name.isEmpty()) {
-            showToast("Name is required");
-            return false;
-        }
-        if (rollNumber.isEmpty()) {
-            showToast("Roll Number is required");
-            return false;
-        }
-        if (email.isEmpty() || !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            showToast("Enter a valid email");
-            return false;
-        }
-        if (password.isEmpty() || password.length() < 6) {
-            showToast("Password must be at least 6 characters");
-            return false;
-        }
-        return true;
-    }
-
-    private void saveUserToFirestore(String userId, String name, String email, String rollNumber) {
-        Map<String, Object> user = new HashMap<>();
-        user.put("name", name);
-        user.put("email", email);
-        user.put("rollNumber", rollNumber);
-
-        db.collection("users").document(userId).set(user)
-                .addOnSuccessListener(aVoid -> {
-                    progressBar.setVisibility(View.GONE);
-                    btnSignup.setEnabled(true);
-                    showToast("Registration Successful!");
-                    startActivity(new Intent(SignupActivity.this, MainActivity.class));
-                    finish();
-                })
-                .addOnFailureListener(e -> {
-                    progressBar.setVisibility(View.GONE);
-                    btnSignup.setEnabled(true);
-                    showToast("Error: " + e.getMessage());
-                });
-    }
-
-    private void showToast(String message) {
-        Toast.makeText(SignupActivity.this, message, Toast.LENGTH_SHORT).show();
+        btn_login.setOnClickListener(v -> startActivity(new Intent(SignupActivity.this, LoginActivity.class)));
     }
 }

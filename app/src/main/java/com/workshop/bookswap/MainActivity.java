@@ -12,8 +12,6 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-import java.util.Objects;
-
 public class MainActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
@@ -49,50 +47,50 @@ public class MainActivity extends AppCompatActivity {
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.fragment_container, new HomeFragment())
                     .commit();
-            Objects.requireNonNull(getSupportActionBar()).setTitle("Home");
+            if (getSupportActionBar() != null) {
+                getSupportActionBar().setTitle("Home");
+            }
         }
 
-        // Navigation Click Listener
-        bottomNavigationView.setOnItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                Fragment selectedFragment = null;
-                String title = "BookSwap";
+        // Navigation Click Listener (Updated)
+        bottomNavigationView.setOnItemSelectedListener(item -> {
+            Fragment selectedFragment = null;
+            String title = "BookSwap";
 
-                if (item.getItemId() == R.id.nav_home) {
-                    selectedFragment = new HomeFragment();
-                    title = "Home";
-                } else if (item.getItemId() == R.id.nav_sell) {
-                    if (isGuest) {
-                        showGuestRestrictionToast();
-                        return false;
-                    }
-                    selectedFragment = new SellFragment();
-                    title = "Sell a Book";
-                } else if (item.getItemId() == R.id.nav_auction) {
-                    selectedFragment = new AuctionFragment();
-                    title = "Auction";
-                } else if (item.getItemId() == R.id.nav_messages) {
-                    if (isGuest) {
-                        showGuestRestrictionToast();
-                        return false;
-                    }
-                    selectedFragment = new MessagesFragment();
-                    title = "Messages";
-                } else if (item.getItemId() == R.id.nav_profile) {
-                    selectedFragment = new ProfileFragment();
-                    title = "Profile";
+            if (item.getItemId() == R.id.nav_home) {
+                selectedFragment = new HomeFragment();
+                title = "Home";
+            } else if (item.getItemId() == R.id.nav_sell) {
+                if (isGuest) {
+                    showGuestRestrictionToast();
+                    return false;
                 }
+                selectedFragment = new SellFragment();
+                title = "Sell a Book";
+            } else if (item.getItemId() == R.id.nav_auction) {
+                selectedFragment = new AuctionFragment();
+                title = "Auction";
+            } else if (item.getItemId() == R.id.nav_messages) {
+                if (isGuest) {
+                    showGuestRestrictionToast();
+                    return false;
+                }
+                selectedFragment = new MessagesFragment();
+                title = "Messages";
+            } else if (item.getItemId() == R.id.nav_profile) {
+                selectedFragment = new ProfileFragment();
+                title = "Profile";
+            }
 
-                if (selectedFragment != null) {
-                    getSupportFragmentManager().beginTransaction()
-                            .replace(R.id.fragment_container, selectedFragment)
-                            .commit();
+            if (selectedFragment != null) {
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.fragment_container, selectedFragment)
+                        .commit();
+                if (getSupportActionBar() != null) {
                     getSupportActionBar().setTitle(title);
                 }
-
-                return true;
             }
+            return true;
         });
     }
 
