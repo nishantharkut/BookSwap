@@ -11,10 +11,11 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?attr/colorPrimary"
+        android:background="#5A70DC"
         android:elevation="4dp"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-        app:title="BookSwap" />
+        app:title="BookSwap"
+        android:textAlignment="center"/>
 
     <!-- Fragment Container -->
     <FrameLayout
@@ -29,8 +30,5 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        app:menu="@menu/bottom_nav_menu"
-        app:itemIconTint="@color/nav_item_color"
-        app:itemTextColor="@color/nav_item_color" />
-
+        app:menu="@menu/bottom_nav_menu" />
 </RelativeLayout>

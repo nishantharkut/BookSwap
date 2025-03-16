@@ -12,6 +12,6 @@
         <item name="android:backgroundTint">#6200EE</item>
         <item name="android:textColor">#FFFFFF</item>
         <item name="android:textStyle">bold</item>
-        <item name="android:marginRight">8dp</item>
+        <item name="android:layout_marginEnd">8dp</item> <!-- Fixed -->
     </style>
 </resources>

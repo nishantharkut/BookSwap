@@ -8,6 +8,39 @@
     android:padding="16dp"
     tools:context=".HomeFragment">
 
+    <!-- Animated Header Section -->
+    <LinearLayout
+        android:id="@+id/header_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:padding="10dp"
+        android:background="@color/white">
+
+        <!-- Logo Placeholder -->
+        <ImageView
+            android:id="@+id/logo"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:src="@drawable/ic_logo"
+        android:contentDescription="App Logo"
+        android:layout_gravity="center"
+        android:visibility="visible" />
+
+        <!-- Animated TextView -->
+        <TextView
+            android:id="@+id/welcome_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Welcome to BookSwap!"
+            android:textSize="18sp"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:paddingTop="8dp"/>
+    </LinearLayout>
+
     <!-- Search Bar -->
     <androidx.appcompat.widget.SearchView
         android:id="@+id/search_books"
@@ -15,8 +48,8 @@
         android:layout_height="wrap_content"
         android:queryHint="Search for books..."
         android:iconifiedByDefault="false"
-        android:background="@drawable/search_background"
-        android:padding="8dp" />
+        android:padding="8dp"
+        android:background="?attr/colorPrimary" /> <!-- Fixed missing drawable -->
 
     <!-- Category Section -->
     <HorizontalScrollView
@@ -30,25 +63,57 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <Button
-                android:id="@+id/btn_fiction"
-                style="@style/CategoryButton"
-                android:text="Fiction" />
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="4dp"
+                android:layout_marginEnd="8dp">
 
-            <Button
-                android:id="@+id/btn_nonfiction"
-                style="@style/CategoryButton"
-                android:text="Non-fiction" />
+                <Button
+                    android:id="@+id/btn_fiction"
+                    style="@style/CategoryButton"
+                    android:text="Fiction" />
+            </com.google.android.material.card.MaterialCardView>
 
-            <Button
-                android:id="@+id/btn_scifi"
-                style="@style/CategoryButton"
-                android:text="Sci-Fi" />
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="4dp"
+                android:layout_marginEnd="8dp">
 
-            <Button
-                android:id="@+id/btn_education"
-                style="@style/CategoryButton"
-                android:text="Education" />
+                <Button
+                    android:id="@+id/btn_nonfiction"
+                    style="@style/CategoryButton"
+                    android:text="Non-fiction" />
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="4dp"
+                android:layout_marginEnd="8dp">
+
+                <Button
+                    android:id="@+id/btn_scifi"
+                    style="@style/CategoryButton"
+                    android:text="Sci-Fi" />
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="4dp">
+
+                <Button
+                    android:id="@+id/btn_education"
+                    style="@style/CategoryButton"
+                    android:text="Education" />
+            </com.google.android.material.card.MaterialCardView>
+
         </LinearLayout>
     </HorizontalScrollView>
 
@@ -67,6 +132,7 @@
         android:layout_height="150dp"
         android:orientation="horizontal"
         android:overScrollMode="never"
+        android:clipToPadding="false"
         android:layout_marginBottom="12dp" />
 
     <!-- Recent Listings (Vertical Scroll) -->
@@ -82,6 +148,7 @@
         android:id="@+id/recycler_recent_books"
         android:layout_width="match_parent"
         android:layout_height="271dp"
-        android:overScrollMode="never" />
+        android:overScrollMode="never"
+        android:clipToPadding="false" />
 
 </LinearLayout>

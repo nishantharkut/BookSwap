@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="login_logo" type="id" />
+    <item name="login_app_name" type="id" />
+    <item name="login_guest" type="id" />
+</resources>
