@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/featured_book_container"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="8dp"
+    android:layout_marginEnd="8dp"
+    android:background="@drawable/featured_book_bg">
+
+    <ImageView
+        android:id="@+id/imageViewFeaturedBook"
+        android:layout_width="match_parent"
+        android:layout_height="160dp"
+        android:scaleType="centerCrop"
+        android:contentDescription="Book Image" />
+
+    <TextView
+        android:id="@+id/textViewFeaturedTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Book Title"
+        android:textStyle="bold"
+        android:textSize="16sp"
+        android:paddingTop="8dp"
+        android:maxLines="2"
+        android:ellipsize="end" />
+
+    <TextView
+        android:id="@+id/textViewFeaturedPrice"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="₹199"
+        android:textColor="@android:color/holo_green_dark"
+        android:textSize="14sp"
+        android:paddingTop="4dp" />
+</LinearLayout>

@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:fillViewport="true"
+    android:background="#FAFAFA">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:layout_marginBottom="20dp"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="4dp"
+            app:cardPreventCornerOverlap="true"
+            app:cardUseCompatPadding="true">
+
+            <ImageView
+                android:id="@+id/book_image"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:contentDescription="Book cover image"
+                android:adjustViewBounds="true" />
+        </androidx.cardview.widget.CardView>
+
+        <!-- Book Title -->
+        <TextView
+            android:id="@+id/book_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Book Title"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="#212121"
+            android:gravity="center"
+            android:layout_marginBottom="4dp" />
+
+        <!-- Author -->
+        <TextView
+            android:id="@+id/book_author"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="by Author"
+            android:textSize="16sp"
+            android:textColor="#757575"
+            android:layout_marginBottom="12dp" />
+
+        <!-- Info -->
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal">
+
+            <TextView
+                android:id="@+id/book_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="₹0.00"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="#4CAF50"
+                android:layout_marginBottom="4dp" />
+
+            <TextView
+                android:id="@+id/book_condition"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Condition: Good"
+                android:textSize="14sp"
+                android:textColor="#424242" />
+
+            <TextView
+                android:id="@+id/book_category"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Category: CS"
+                android:textSize="14sp"
+                android:textColor="#424242"
+                android:layout_marginTop="2dp" />
+        </LinearLayout>
+
+        <!-- Auction Countdown -->
+        <TextView
+            android:id="@+id/book_auction_countdown"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Auction ends in: --"
+            android:textColor="#D32F2F"
+            android:textSize="14sp"
+            android:layout_marginTop="16dp"
+            android:visibility="gone" />
+
+        <!-- Action Buttons -->
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_marginTop="180dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:weightSum="3">
+
+            <Button
+                android:id="@+id/btn_buy_now"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginEnd="8dp"
+                android:backgroundTint="#6200EE"
+                android:textColor="#FFFFFF"
+                android:text="Buy Now" />
+
+            <Button
+                android:id="@+id/btn_rent"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginEnd="8dp"
+                android:backgroundTint="#03DAC5"
+                android:textColor="#000000"
+                android:text="Request to Rent" />
+
+            <Button
+                android:id="@+id/btn_chat"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:backgroundTint="#FF9800"
+                android:textColor="#FFFFFF"
+                android:text="Chat" />
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>
