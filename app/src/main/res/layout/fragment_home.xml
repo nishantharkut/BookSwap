@@ -1,154 +1,191 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
+    android:fillViewport="true"
     android:padding="16dp"
     tools:context=".HomeFragment">
 
-    <!-- Animated Header Section -->
     <LinearLayout
-        android:id="@+id/header_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:gravity="center"
-        android:padding="10dp"
-        android:background="@color/white">
+        android:orientation="vertical">
 
-        <!-- Logo Placeholder -->
+        <!-- Logo -->
         <ImageView
             android:id="@+id/logo"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center"
             android:src="@drawable/ic_logo"
-        android:contentDescription="App Logo"
-        android:layout_gravity="center"
-        android:visibility="visible" />
+            />
 
-        <!-- Animated TextView -->
+        <!-- Welcome Text -->
         <TextView
             android:id="@+id/welcome_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:text="Welcome to BookSwap!"
-            android:textSize="18sp"
-            android:textColor="@color/black"
+            android:textSize="20sp"
             android:textStyle="bold"
-            android:gravity="center"
-            android:paddingTop="8dp"/>
-    </LinearLayout>
+            android:textColor="@color/black"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="16dp" />
 
-    <!-- Search Bar -->
-    <androidx.appcompat.widget.SearchView
-        android:id="@+id/search_books"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:queryHint="Search for books..."
-        android:iconifiedByDefault="false"
-        android:padding="8dp"
-        android:background="?attr/colorPrimary" /> <!-- Fixed missing drawable -->
-
-    <!-- Category Section -->
-    <HorizontalScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingTop="10dp"
-        android:scrollbars="none">
-
-        <LinearLayout
+        <!-- Search View -->
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/search_books"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:queryHint="Search for books"
+            android:iconifiedByDefault="false"
+            android:layout_marginBottom="16dp" />
+        <!-- 🔹 Section Heading: Categories -->
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:text="📚 Book Categories"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:layout_marginBottom="6dp" />
 
-            <com.google.android.material.card.MaterialCardView
+        <!-- 🔹 Category Section -->
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="none"
+            android:layout_marginBottom="16dp">
+
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/category_chips"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:cardCornerRadius="8dp"
-                app:cardElevation="4dp"
-                android:layout_marginEnd="8dp">
+                app:singleSelection="true"
+                android:checkableBehavior="single">
 
-                <Button
-                    android:id="@+id/btn_fiction"
-                    style="@style/CategoryButton"
-                    android:text="Fiction" />
-            </com.google.android.material.card.MaterialCardView>
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_fiction"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Fiction"
+                    style="@style/Widget.MaterialComponents.Chip.Choice"/>
 
-            <com.google.android.material.card.MaterialCardView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:cardCornerRadius="8dp"
-                app:cardElevation="4dp"
-                android:layout_marginEnd="8dp">
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_nonfiction"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Non-fiction"
+                    style="@style/Widget.MaterialComponents.Chip.Choice"/>
 
-                <Button
-                    android:id="@+id/btn_nonfiction"
-                    style="@style/CategoryButton"
-                    android:text="Non-fiction" />
-            </com.google.android.material.card.MaterialCardView>
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_scifi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Sci-Fi"
+                    style="@style/Widget.MaterialComponents.Chip.Choice"/>
 
-            <com.google.android.material.card.MaterialCardView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:cardCornerRadius="8dp"
-                app:cardElevation="4dp"
-                android:layout_marginEnd="8dp">
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_education"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Education"
+                    style="@style/Widget.MaterialComponents.Chip.Choice"/>
+            </com.google.android.material.chip.ChipGroup>
+        </HorizontalScrollView>
+        <!-- Featured Books -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Featured Books"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:layout_marginBottom="8dp" />
 
-                <Button
-                    android:id="@+id/btn_scifi"
-                    style="@style/CategoryButton"
-                    android:text="Sci-Fi" />
-            </com.google.android.material.card.MaterialCardView>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/featured_books_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp" />
+        <include
+            android:id="@+id/shimmer_featured"
+            layout="@layout/shimmer_placeholder"
+            android:visibility="gone" />
+        <TextView
+            android:id="@+id/no_featured_books_text_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="No featured books available"
+            android:textColor="@android:color/darker_gray"
+            android:gravity="center"
+            android:visibility="gone"
+            android:padding="12dp" />
 
-            <com.google.android.material.card.MaterialCardView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:cardCornerRadius="8dp"
-                app:cardElevation="4dp">
+        <!-- Recent Books -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Recent Books"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:layout_marginBottom="8dp" />
 
-                <Button
-                    android:id="@+id/btn_education"
-                    style="@style/CategoryButton"
-                    android:text="Education" />
-            </com.google.android.material.card.MaterialCardView>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recent_books_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp" />
+        <include
+            android:id="@+id/shimmer_recent"
+            layout="@layout/shimmer_placeholder"
+            android:visibility="gone" />
+        <TextView
+            android:id="@+id/no_recent_books_text_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="No recent books available"
+            android:textColor="@android:color/darker_gray"
+            android:gravity="center"
+            android:visibility="gone"
+            android:padding="12dp" />
 
-        </LinearLayout>
-    </HorizontalScrollView>
+        <!-- Auction Books -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Auction Books"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:layout_marginBottom="8dp" />
 
-    <!-- Featured Books (Horizontal Scroll) -->
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Featured Books"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:layout_marginTop="12dp" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/auction_books_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:nestedScrollingEnabled="false"
+            android:layout_marginBottom="16dp" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_featured_books"
-        android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:orientation="horizontal"
-        android:overScrollMode="never"
-        android:clipToPadding="false"
-        android:layout_marginBottom="12dp" />
+        <include
+            android:id="@+id/shimmer_auction"
+            layout="@layout/shimmer_placeholder"
+            android:visibility="gone" />
 
-    <!-- Recent Listings (Vertical Scroll) -->
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Recent Listings"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:layout_marginTop="12dp" />
+        <TextView
+            android:id="@+id/no_auction_books_text_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="No auction books available"
+            android:textColor="@android:color/darker_gray"
+            android:gravity="center"
+            android:visibility="gone"
+            android:padding="12dp" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_recent_books"
-        android:layout_width="match_parent"
-        android:layout_height="271dp"
-        android:overScrollMode="never"
-        android:clipToPadding="false" />
 
-</LinearLayout>
+    </LinearLayout>
+</ScrollView>

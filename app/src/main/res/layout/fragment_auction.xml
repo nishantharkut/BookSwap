@@ -1,28 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical">
+    android:padding="16dp">
 
-    <EditText
-        android:id="@+id/et_book_title"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Enter Book Title"/>
+        android:orientation="vertical">
 
-    <EditText
-        android:id="@+id/et_book_starting_bid"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Enter Starting Bid"
-        android:inputType="numberDecimal"/>
+        <EditText
+            android:id="@+id/et_book_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter Book Title" />
 
-    <Button
-        android:id="@+id/btn_start_auction"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Start Auction"
-        style="@style/CustomButton"/>
-</LinearLayout>
+        <EditText
+            android:id="@+id/et_book_starting_bid"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter Starting Bid"
+            android:inputType="numberDecimal" />
+
+        <Spinner
+            android:id="@+id/spinner_condition"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:entries="@array/book_conditions" />
+
+        <TextView
+            android:id="@+id/tv_selected_time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Select Auction End Time"
+            android:textColor="@android:color/darker_gray"
+            android:padding="8dp"
+            android:background="@android:color/white"
+            android:clickable="true"
+            android:focusable="true"
+            android:layout_marginTop="12dp"
+            />
+
+        <Button
+            android:id="@+id/btn_start_auction"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Start Auction"
+            android:layout_marginTop="16dp" />
+    </LinearLayout>
+</ScrollView>

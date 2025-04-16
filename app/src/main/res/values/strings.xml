@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">BookSwap</string>
+    <string name="price_placeholder">₹%s</string>
+
 </resources>

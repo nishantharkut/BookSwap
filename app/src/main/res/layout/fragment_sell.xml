@@ -2,36 +2,74 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:padding="16dp">
+    android:padding="16dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:gravity="center_horizontal">
 
+        <!-- Book Image Upload -->
+        <ImageView
+            android:id="@+id/image_book"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_launcher_background"/>
+
+        <Button
+            android:id="@+id/btn_select_image"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Select Image"/>
+
+        <Button
+            android:id="@+id/btn_upload_image"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Upload Image"/>
+
+        <!-- Book Title -->
         <EditText
             android:id="@+id/edit_book_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Enter Book Title"/>
+            android:hint="Enter Book Title"
+            android:layout_marginTop="8dp"/>
 
+        <!-- Book Price -->
         <EditText
             android:id="@+id/edit_book_price"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Enter Price (₹)"/>
+            android:hint="Enter Price (₹)"
+            android:inputType="numberDecimal"
+            android:layout_marginTop="8dp"/>
 
+        <!-- Book Category -->
+        <Spinner
+            android:id="@+id/spinner_category"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:entries="@array/book_categories"/>
+
+        <!-- Book Condition -->
         <Spinner
             android:id="@+id/spinner_condition"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             android:entries="@array/book_conditions"/>
 
+        <!-- Sell Book Button -->
         <Button
             android:id="@+id/btn_sell_book"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="List Book for Sale"/>
+            android:text="List Book for Sale"
+            android:layout_marginTop="12dp"/>
     </LinearLayout>
 </ScrollView>

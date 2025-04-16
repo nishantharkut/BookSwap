@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -23,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         // Get Guest Mode Status
-        isGuest = getIntent().getBooleanExtra("isGuest", false);
+        isGuest = getIntent().getBooleanExtra("guest", false);
 
         // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
@@ -60,24 +61,40 @@ public class MainActivity extends AppCompatActivity {
             if (item.getItemId() == R.id.nav_home) {
                 selectedFragment = new HomeFragment();
                 title = "Home";
-            } else if (item.getItemId() == R.id.nav_sell) {
+            }
+
+            else if (item.getItemId() == R.id.nav_sell) {
                 if (isGuest) {
                     showGuestRestrictionToast();
                     return false;
                 }
                 selectedFragment = new SellFragment();
-                title = "Sell a Book";
-            } else if (item.getItemId() == R.id.nav_auction) {
+                title = "Sell Your Books";
+            }
+
+            else if (item.getItemId() == R.id.nav_auction) {
+                if (isGuest){
+                    showGuestRestrictionToast();
+                    return false;
+                }
                 selectedFragment = new AuctionFragment();
                 title = "Auction";
-            } else if (item.getItemId() == R.id.nav_messages) {
+            }
+
+            else if (item.getItemId() == R.id.nav_messages) {
                 if (isGuest) {
                     showGuestRestrictionToast();
                     return false;
                 }
                 selectedFragment = new MessagesFragment();
                 title = "Messages";
-            } else if (item.getItemId() == R.id.nav_profile) {
+            }
+
+            else if (item.getItemId() == R.id.nav_profile) {
+                if(isGuest){
+                    showGuestRestrictionToast();
+                    return false;
+                }
                 selectedFragment = new ProfileFragment();
                 title = "Profile";
             }
@@ -107,4 +124,9 @@ public class MainActivity extends AppCompatActivity {
     private void showGuestRestrictionToast() {
         Toast.makeText(this, "You must log in to access this feature", Toast.LENGTH_SHORT).show();
     }
+    public void navigateToHome() {
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
+        bottomNavigationView.setSelectedItemId(R.id.nav_home);
+    }
+
 }

@@ -1,10 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string-array name="book_categories">
+        <item>Fiction</item>
+        <item>Non-Fiction</item>
+        <item>Science</item>
+        <item>Engineering</item>
+        <item>Mathematics</item>
+        <item>Business</item>
+        <item>Self-Help</item>
+        <item>Other</item>
+    </string-array>
+
     <string-array name="book_conditions">
         <item>New</item>
         <item>Like New</item>
         <item>Good</item>
-        <item>Fair</item>
-        <item>Poor</item>
+        <item>Acceptable</item>
+        <item>Used</item>
     </string-array>
 </resources>
