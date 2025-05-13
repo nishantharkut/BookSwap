@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:fillViewport="true"
     android:padding="16dp"
+    android:background="@drawable/backgroundd"
     tools:context=".HomeFragment">
 
     <LinearLayout
@@ -42,7 +43,9 @@
             android:layout_height="wrap_content"
             android:queryHint="Search for books"
             android:iconifiedByDefault="false"
-            android:layout_marginBottom="16dp" />
+            android:layout_marginBottom="16dp"
+            android:background="@color/blue"
+            />
         <!-- 🔹 Section Heading: Categories -->
         <TextView
             android:layout_width="wrap_content"
